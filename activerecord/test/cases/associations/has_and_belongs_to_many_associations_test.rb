@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "support/deprecated_associations_test_helpers"
 require "cases/helper"
 require "models/developer"
 require "models/computer"
@@ -995,3 +996,60 @@ class HasAndBelongsToManyAssociationsTest < ActiveRecord::TestCase
     assert_equal 1, sink.sources.count
   end
 end
+
+# class TestDeprecatedHasAndBelongsToManyAssociations < ActiveRecord::TestCase
+#   include DeprecatedAssociationsTestHelpers
+
+#   fixtures :posts, :categories
+
+#   setup do
+#     @model = Post
+#     @post = Post.new
+#   end
+
+#   test "<association>" do
+#     assert_not_deprecated_association(:categories) do
+#       assert_equal [], @post.categories
+#     end
+
+#     assert_deprecated_association(:deprecated_categories) do
+#       assert_equal [], @post.deprecated_categories
+#     end
+#   end
+
+#   test "<association>=" do
+#     assert_not_deprecated_association(:categories) do
+#       @post.categories = []
+#     end
+
+#     deprecated_categories = [Category.new]
+
+#     assert_deprecated_association(:deprecated_categories) do
+#       @post.deprecated_categories = deprecated_categories
+#     end
+
+#     assert_equal deprecated_categories, @post.deprecated_categories
+#   end
+
+#   test "<singular_association>_ids" do
+#     assert_not_deprecated_association(:categories) do
+#       @post.category_ids
+#     end
+
+#     @post.deprecated_category_ids = [1, 2]
+#     assert_deprecated_association(:deprecated_categories) do
+#       assert_equal [1, 2], @post.deprecated_category_ids
+#     end
+#   end
+
+#   test "<singular_association>_ids=" do
+#     assert_not_deprecated_association(:categories) do
+#       @post.category_ids = []
+#     end
+
+#     assert_deprecated_association(:deprecated_categories) do
+#       @post.deprecated_category_ids = [1, 2]
+#     end
+#     assert_equal [1, 2], @post.deprecated_category_ids
+#   end
+# end
