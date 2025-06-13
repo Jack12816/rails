@@ -18,9 +18,5 @@ module ActiveRecord::Associations::Deprecation # :nodoc:
       # TODO
       # warn("The association #{reflection.active_record.name}##{reflection.name} is deprecated")
     end
-
-    def guard_through_association(reflection)
-      reflection.deprecated_nested_reflections.each { notify(_1) }
-    end
   end
 end
