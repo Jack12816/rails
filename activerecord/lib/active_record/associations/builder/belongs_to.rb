@@ -152,13 +152,13 @@ module ActiveRecord::Associations::Builder # :nodoc:
       model.generated_association_methods.class_eval <<-CODE, __FILE__, __LINE__ + 1
         def #{reflection.name}_changed?
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.target_changed?
         end
 
         def #{reflection.name}_previously_changed?
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.target_previously_changed?
         end
       CODE

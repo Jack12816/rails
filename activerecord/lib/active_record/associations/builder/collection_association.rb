@@ -61,7 +61,7 @@ module ActiveRecord::Associations::Builder # :nodoc:
       mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
         def #{reflection.name.to_s.singularize}_ids
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.ids_reader
         end
       CODE
@@ -73,7 +73,7 @@ module ActiveRecord::Associations::Builder # :nodoc:
       mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
         def #{reflection.name.to_s.singularize}_ids=(ids)
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association(:#{reflection.name}).ids_writer(ids)
         end
       CODE

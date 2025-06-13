@@ -2,11 +2,7 @@
 
 module ActiveRecord::Associations::Deprecation # :nodoc:
   class << self
-    def guard_association(association)
-      guard_reflection(association.reflection)
-    end
-
-    def guard_reflection(reflection)
+    def guard(reflection)
       notify(reflection) if reflection.deprecated?
 
       if reflection.through_reflection?

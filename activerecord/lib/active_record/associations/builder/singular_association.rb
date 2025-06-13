@@ -17,13 +17,13 @@ module ActiveRecord::Associations::Builder # :nodoc:
       mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
         def reload_#{reflection.name}
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.force_reload_reader
         end
 
         def reset_#{reflection.name}
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.reset
         end
       CODE
@@ -34,19 +34,19 @@ module ActiveRecord::Associations::Builder # :nodoc:
       mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
         def build_#{reflection.name}(*args, &block)
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.build(*args, &block)
         end
 
         def create_#{reflection.name}(*args, &block)
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.create(*args, &block)
         end
 
         def create_#{reflection.name}!(*args, &block)
           association = association(:#{reflection.name})
-          ActiveRecord::Associations::Deprecation.guard_association(association)
+          ActiveRecord::Associations::Deprecation.guard(association.reflection)
           association.create!(*args, &block)
         end
       CODE

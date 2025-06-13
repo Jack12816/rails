@@ -389,7 +389,7 @@ module ActiveRecord
             silence_redefinition_of_method :#{reflection.name}_attributes=
             def #{reflection.name}_attributes=(attributes)
               association = association(:#{reflection.name})
-              ActiveRecord::Associations::Deprecation.guard_association(association)
+              ActiveRecord::Associations::Deprecation.guard(association.reflection)
               assign_nested_attributes_for_#{type}_association(:#{reflection.name}, attributes)
             end
           eoruby
