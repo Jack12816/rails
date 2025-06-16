@@ -235,6 +235,8 @@ module ActiveRecord
               raise EagerLoadPolymorphicError.new(reflection)
             end
 
+            Deprecation.guard(reflection)
+
             JoinAssociation.new(reflection, build(right, reflection.klass))
           end
         end
