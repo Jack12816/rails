@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "active_support/notifications"
+
 module ActiveRecord::Associations::Deprecation # :nodoc:
   class << self
     def guard(reflection)
@@ -15,8 +17,8 @@ module ActiveRecord::Associations::Deprecation # :nodoc:
     end
 
     def notify(reflection)
-      # TODO
-      # warn("The association #{reflection.active_record.name}##{reflection.name} is deprecated")
+      ActiveRecord::Base.logger&.warn("The association #{reflection.active_record}##{reflection.name} is deprecated")
+      ActiveSupport::Notifications.instrument("deprecated_association.active_record", reflection: reflection)
     end
   end
 end
