@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DeprecatedAssociationsTestHelpers
   private
     def assert_deprecated_association(association, model = @model, &)

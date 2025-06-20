@@ -720,7 +720,6 @@ end
 
 
 class DeprecatedReflectionsTest < ActiveRecord::TestCase
-
   test "has_many" do
     assert_non_deprecated_reflection DATS::Author, :posts
     assert_deprecated_reflection DATS::Author, :deprecated_posts
@@ -760,7 +759,6 @@ class DeprecatedReflectionsTest < ActiveRecord::TestCase
   end
 
   private
-
     def assert_non_deprecated_reflection(model, name)
       assert_not_predicate model.reflect_on_association(name), :deprecated?
     end

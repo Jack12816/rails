@@ -1019,7 +1019,7 @@ class DeprecatedHasAndBelongsToManyAssociationsTest < ActiveRecord::TestCase
   end
 
   test "<association>=" do
-    post = DATS::Post.new(title: 'Title', body: 'Body')
+    post = DATS::Post.new(title: "Title", body: "Body")
 
     assert_not_deprecated_association(:posts) do
       @category.posts = [post]
@@ -1042,7 +1042,7 @@ class DeprecatedHasAndBelongsToManyAssociationsTest < ActiveRecord::TestCase
   end
 
   test "<singular_association>_ids=" do
-    post = DATS::Post.create!(title: 'Title', body: 'Body')
+    post = DATS::Post.create!(title: "Title", body: "Body")
 
     assert_not_deprecated_association(:posts) do
       @category.post_ids = [post.id]
